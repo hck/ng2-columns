@@ -1,0 +1,8 @@
+<div class="grid">
+    <column-component class="column"
+                      *ngFor="#column of columns; #columnIndex = index"
+                      [column]="column"
+                      (dragColumn)="onDragColumn($event)"
+                      (moveColumn)="onMoveColumn($event)">
+    </column-component>
+</div>

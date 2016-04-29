@@ -1,0 +1,10 @@
+<div class="col" draggable="true"
+     (dragstart)="onDragStart($event)"
+     (dragover)="onDragOver($event, column)"
+     (dragenter)="onDragEnter($event, column)"
+     (dragleave)="onDragLeave($event, column)"
+     (drop)="onDrop($event, column)"
+     (dragend)="onDragEnd($event)"
+     [class.is-dragged]="isDragged">
+    <h5>{{column.title}}</h5>
+</div>
