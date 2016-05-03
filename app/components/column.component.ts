@@ -1,11 +1,15 @@
 import {Component, EventEmitter} from 'angular2/core';
 
 import {Column} from '../models/column';
+import {CardComponent} from '../components/card.component';
+import {FilterWith} from '../pipes/filter-with.pipe';
 
 @Component({
     selector: 'column-component',
     templateUrl: 'app/templates/column.template.html',
-    inputs: ['column'],
+    directives: [CardComponent],
+    pipes: [FilterWith],
+    inputs: ['column', 'cards'],
     outputs: ['dragColumn', 'moveColumn', 'deleteColumn']
 })
 

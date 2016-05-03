@@ -1,4 +1,5 @@
-<div class="col" draggable="true"
+<div class="col"
+     draggable="true"
      (dragstart)="onDragStart($event)"
      (dragover)="onDragOver($event, column)"
      (dragenter)="onDragEnter($event, column)"
@@ -7,4 +8,8 @@
      (dragend)="onDragEnd($event)"
      [class.is-dragged]="isDragged">
     <h5>{{column.title}}</h5>
+
+    <card-component *ngFor="#card of cards | filterWith:'columnId':column.id; #i = index"
+                    [card]="card">
+    </card-component>
 </div>

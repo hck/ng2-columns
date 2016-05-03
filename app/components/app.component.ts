@@ -3,12 +3,13 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {ColumnsComponent} from './columns.component';
 import {ColumnsService} from '../services/columns.service';
+import {CardsService} from '../services/cards.service';
 
 @Component({
     selector: 'columns-app',
     templateUrl: 'app/templates/app.template.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [ColumnsService]
+    providers: [ColumnsService, CardsService]
 })
 
 @RouteConfig([

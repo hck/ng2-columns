@@ -1,6 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
 import {Column} from '../models/column';
 import {ColumnsService} from '../services/columns.service';
+import {Card} from '../models/card';
+import {CardsService} from '../services/cards.service';
 import {ColumnComponent} from '../components/column.component';
 
 @Component({
@@ -12,11 +14,13 @@ import {ColumnComponent} from '../components/column.component';
 export class ColumnsComponent implements OnInit {
     public _dragColumn: Column;
     public columns: Column[];
+    public cards: Card[];
 
-    constructor(private _columnsService: ColumnsService) {}
+    constructor(private _columnsService: ColumnsService, private _cardsService: CardsService) {}
 
     ngOnInit() {
         this._columnsService.fetchAll().then(columns => this.columns = columns);
+        this._cardsService.fetchAll().then(cards => { console.log(cards); this.cards = cards });
     }
 
     onDragColumn(event) {

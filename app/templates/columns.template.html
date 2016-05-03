@@ -2,6 +2,7 @@
     <column-component class="column"
                       *ngFor="#column of columns; #columnIndex = index"
                       [column]="column"
+                      [cards]="cards"
                       (dragColumn)="onDragColumn($event)"
                       (moveColumn)="onMoveColumn($event)">
     </column-component>
