@@ -1,16 +1,16 @@
-import {Component, EventEmitter} from 'angular2/core';
+import {Component, EventEmitter} from '@angular/core';
 
 import {Column} from '../models/column';
 import {CardComponent} from '../components/card.component';
-import {FilterWith} from '../pipes/filter-with.pipe';
+import {FilterWithPipe} from '../pipes/filter-with.pipe';
 
 @Component({
     selector: 'column-component',
     templateUrl: 'app/templates/column.template.html',
     directives: [CardComponent],
-    pipes: [FilterWith],
-    inputs: ['column', 'cards'],
-    outputs: ['dragColumn', 'moveColumn', 'deleteColumn']
+    pipes: [FilterWithPipe],
+    inputs: ['column', 'cards', 'draggedCard'],
+    outputs: ['dragColumn', 'moveColumn', 'deleteColumn', 'dragCard', 'moveCard']
 })
 
 export class ColumnComponent {
@@ -21,8 +21,12 @@ export class ColumnComponent {
     public moveColumn = new EventEmitter();
     public deleteColumn = new EventEmitter();
 
+    public dragCard = new EventEmitter();
+    public moveCard = new EventEmitter();
+
     private _isDragAllowed(event) {
-        return event.dataTransfer.types.indexOf('draggedcolumnid') > -1;
+        let transferTypes = event.dataTransfer.types;
+        return transferTypes.indexOf('draggedcolumnid') > -1 || transferTypes.indexOf('draggedcardid') > -1;
     }
 
     onDragStart(event) {
@@ -36,29 +40,40 @@ export class ColumnComponent {
         this.dragColumn.emit(this.column);
     }
 
-    onDragOver(event, column) {
+    onDragOver(event) {
         if (!this._isDragAllowed(event)) return true;
         event.preventDefault();
     }
 
-    onDragEnter(event, column) {
+    onDragEnter(event) {
         if (!this._isDragAllowed(event)) return true;
 
-        this.moveColumn.emit(column.id);
+        let transferTypes = event.dataTransfer.types;
+
+        if (transferTypes.indexOf('draggedcolumnid') > -1) {
+            console.log('moving column');
+            this.moveColumn.emit(this.column.id);
+        }
+
+        if (transferTypes.indexOf('draggedcardid') > -1) {
+            console.log('moving card');
+            this.moveCard.emit(this.column.id);
+        }
     }
 
-    onDragLeave(event, column) {
+    onDragLeave(event) {
         if (!this._isDragAllowed(event)) return true;
     }
 
-    onDrop(event, column) {
+    onDrop(event) {
         if (!this._isDragAllowed(event)) return true;
-
-        event.preventDefault();
-        const columnId = event.dataTransfer.getData('draggedColumnId');
     }
 
     onDragEnd(event) {
         this.isDragged = false;
+    }
+
+    onDragCard(event) {
+        this.dragCard.emit(event);
     }
 }

@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Column} from '../models/column';
 import {COLUMNS} from './mock-columns';
 

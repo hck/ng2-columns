@@ -1,5 +1,5 @@
-import {Component, AfterViewChecked} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, AfterViewChecked} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 import {ColumnsComponent} from './columns.component';
 import {ColumnsService} from '../services/columns.service';
@@ -9,7 +9,7 @@ import {CardsService} from '../services/cards.service';
     selector: 'columns-app',
     templateUrl: 'app/templates/app.template.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [ColumnsService, CardsService]
+    providers: [ROUTER_PROVIDERS, ColumnsService, CardsService]
 })
 
 @RouteConfig([

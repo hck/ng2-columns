@@ -1,15 +1,19 @@
 <div class="col"
      draggable="true"
      (dragstart)="onDragStart($event)"
-     (dragover)="onDragOver($event, column)"
-     (dragenter)="onDragEnter($event, column)"
-     (dragleave)="onDragLeave($event, column)"
-     (drop)="onDrop($event, column)"
+     (dragover)="onDragOver($event)"
+     (dragenter)="onDragEnter($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)"
      (dragend)="onDragEnd($event)"
+     (^dragCard)="onDragCard($event)"
+     (myEvent)="myEvent($event)"
      [class.is-dragged]="isDragged">
     <h5>{{column.title}}</h5>
 
-    <card-component *ngFor="#card of cards | filterWith:'columnId':column.id; #i = index"
-                    [card]="card">
+    <card-component *ngFor="let card of cards | filterWith:'columnId':column.id"
+                    [card]="card"
+                    [draggedCard]="draggedCard"
+                    (dragCard)="onDragCard($event)">
     </card-component>
 </div>

@@ -41,3 +41,14 @@
 .col.is-dragged {
     opacity: 0.4;
 }
+
+.card {
+    margin: 10px;
+    padding: 0 5px;
+    background: #ffffff;
+    box-shadow: 0 0 4px #a1a1a1;
+}
+
+.card.is-dragged {
+    background: #ababab;
+}
