@@ -1,19 +1,19 @@
 import {Component, EventEmitter} from '@angular/core';
 
 import {Column} from '../models/column';
+import {Card} from '../models/card';
 import {CardComponent} from '../components/card.component';
-import {FilterWithPipe} from '../pipes/filter-with.pipe';
 
 @Component({
     selector: 'column-component',
     templateUrl: 'app/templates/column.template.html',
     directives: [CardComponent],
-    pipes: [FilterWithPipe],
     inputs: ['column', 'cards', 'draggedCard'],
-    outputs: ['dragColumn', 'moveColumn', 'deleteColumn', 'dragCard', 'moveCard']
+    outputs: ['dragColumn', 'moveColumn', 'deleteColumn', 'dragCard', 'moveCard', 'dragCardEnd']
 })
 
 export class ColumnComponent {
+    public cards: Card[];
     public column: Column;
     public isDragged: boolean = false;
 
@@ -23,6 +23,7 @@ export class ColumnComponent {
 
     public dragCard = new EventEmitter();
     public moveCard = new EventEmitter();
+    public dragCardEnd = new EventEmitter();
 
     private _isDragAllowed(event) {
         let transferTypes = event.dataTransfer.types;
@@ -51,12 +52,10 @@ export class ColumnComponent {
         let transferTypes = event.dataTransfer.types;
 
         if (transferTypes.indexOf('draggedcolumnid') > -1) {
-            console.log('moving column');
             this.moveColumn.emit(this.column.id);
         }
 
         if (transferTypes.indexOf('draggedcardid') > -1) {
-            console.log('moving card');
             this.moveCard.emit(this.column.id);
         }
     }
@@ -75,5 +74,13 @@ export class ColumnComponent {
 
     onDragCard(event) {
         this.dragCard.emit(event);
+    }
+
+    onDragCardEnd(event) {
+        this.dragCardEnd.emit(event);
+    }
+
+    columnCards() {
+        return this.cards.filter(card => card.columnId === this.column.id);
     }
 }

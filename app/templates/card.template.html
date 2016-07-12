@@ -1,12 +1,13 @@
 <div class="card"
      draggable="true"
      (dragstart)="onDragStart($event)"
-     (dragover)="onDragOver($event, card)"
-     (dragenter)="onDragEnter($event, card)"
-     (dragleave)="onDragLeave($event, card)"
-     (drop)="onDrop($event, card)"
+     (dragover)="onDragOver($event)"
+     (dragenter)="onDragEnter($event)"
+     (dragleave)="onDragLeave($event)"
      (dragend)="onDragEnd($event)"
-     [class.is-dragged]="draggedCard && draggedCard.id == card.id">
+     [class.is-dragged]="draggedCard && draggedCard.id == card.id"
+     [class.hl]="isDragged"
+     #dragDiv>
     <h6>{{card.title}}</h6>
     <p>{{card.description}}</p>
 </div>

@@ -7,7 +7,7 @@ import {ColumnComponent} from '../components/column.component';
 
 @Component({
     selector: 'columns-component',
-    templateUrl: 'app/templates/columns.template.html',
+    templateUrl: '/app/templates/columns.template.html',
     directives: [ColumnComponent]
 })
 
@@ -21,8 +21,10 @@ export class ColumnsComponent implements OnInit {
     constructor(private _columnsService: ColumnsService, private _cardsService: CardsService) {}
 
     ngOnInit() {
-        this._columnsService.fetchAll().then(columns => this.columns = columns);
-        this._cardsService.fetchAll().then(cards => { this.cards = cards });
+        return Promise.all([
+            this._columnsService.fetchAll().then(columns => this.columns = columns),
+            this._cardsService.fetchAll().then(cards => { this.cards = cards })
+        ]);
     }
 
     onDragColumn(event) {
@@ -41,6 +43,10 @@ export class ColumnsComponent implements OnInit {
 
     onDragCard(event) {
         this.dragCard = event;
+    }
+
+    onDragCardEnd(event) {
+        this.dragCard = null;
     }
 
     onMoveCard(event) {

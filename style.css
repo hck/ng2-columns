@@ -27,7 +27,16 @@
 
 .column .col {
     height: 100%;
-    background: #eaffe0;
+    /*background: #eaffe0;*/
+    background: #e7f0f5;
+}
+
+.column .column-title {
+    text-align: center;
+    border-bottom: 2px solid #ababab;
+    background: #d6d4ff;
+    padding: 10px 15px;
+    margin: 0;
 }
 
 /*.column-drag-target:before {
@@ -50,5 +59,9 @@
 }
 
 .card.is-dragged {
-    background: #ababab;
+    background: #efefef;
+}
+
+.card.hl {
+    background: #82b1ff;
 }

@@ -6,14 +6,13 @@
      (dragleave)="onDragLeave($event)"
      (drop)="onDrop($event)"
      (dragend)="onDragEnd($event)"
-     (^dragCard)="onDragCard($event)"
-     (myEvent)="myEvent($event)"
      [class.is-dragged]="isDragged">
-    <h5>{{column.title}}</h5>
+    <h5 class="column-title">{{column.title}}</h5>
 
-    <card-component *ngFor="let card of cards | filterWith:'columnId':column.id"
+    <card-component *ngFor="let card of columnCards()"
                     [card]="card"
                     [draggedCard]="draggedCard"
+                    [dragCardEnd]="dragCardEnd"
                     (dragCard)="onDragCard($event)">
     </card-component>
 </div>

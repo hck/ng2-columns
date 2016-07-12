@@ -1,3 +1,3 @@
 export class Column {
-    constructor(public id: Number, public title: String) {}
+    constructor(public id: number, public title: string) {}
 }

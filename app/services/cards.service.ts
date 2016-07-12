@@ -9,7 +9,7 @@ export class CardsService {
         return Promise.resolve(CARDS);
     }
 
-    moveCard(cards: Card[], cardId: Number, columnId: Number) {
+    moveCard(cards: Card[], cardId: number, columnId: number) {
         let result: Card[];
         let card: Card = cards.find(card => { return card.id == cardId });
 
@@ -21,7 +21,7 @@ export class CardsService {
             result.splice(cardIndex, 1);
             result.push(card);
         } else {
-            result = cards;
+            result = cards.slice();
         }
 
         return Promise.resolve(result);

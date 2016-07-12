@@ -1,9 +1,9 @@
 export class Card {
     constructor(
-        public id: Number,
-        public columnId: Number,
-        public title: String,
-        public description?: String,
-        public points?: Number) {
+        public id: number,
+        public columnId: number,
+        public title: string,
+        public description?: string,
+        public points?: number) {
     }
 }
